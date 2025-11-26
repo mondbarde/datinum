@@ -5,6 +5,7 @@ import rehypeRaw from 'rehype-raw';
 import { glossary } from '../utils/glossary';
 
 const Whitepaper = ({ content, onTermClick }) => {
+    const articleRef = React.useRef(null);
     const slugify = (text) =>
         text
             .toLowerCase()
@@ -201,11 +202,38 @@ const Whitepaper = ({ content, onTermClick }) => {
             const nodes = document.querySelectorAll('[data-katex]');
             nodes.forEach((el) => {
                 const isDisplay = el.getAttribute('data-display') === 'true';
-                const tex = el.textContent || '';
+                const tex = el.getAttribute('data-tex') || el.textContent || '';
                 try {
+                    el.innerHTML = '';
                     window.katex.render(tex, el, { displayMode: isDisplay });
                 } catch (e) {
                     // fail silently to avoid breaking render
+                }
+            });
+
+            if (!articleRef.current) return;
+
+            const targets = articleRef.current.querySelectorAll('p, li, h1, h2, h3, h4, blockquote');
+            targets.forEach((node) => {
+                if (node.getAttribute('data-auto-katex-done') === 'true') return;
+                if (node.querySelector('[data-katex]')) return;
+                const text = node.innerText;
+                if (!text.includes('$')) return;
+                try {
+                    let html = text;
+                    html = html.replace(/\$\$([\s\S]+?)\$\$/g, (_, expr) =>
+                        window.katex.renderToString(expr.trim(), { displayMode: true })
+                    );
+                    html = html.replace(/\\\((.+?)\\\)/g, (_, expr) =>
+                        window.katex.renderToString(expr.trim(), { displayMode: false })
+                    );
+                    html = html.replace(/\$(.+?)\$/g, (_, expr) =>
+                        window.katex.renderToString(expr.trim(), { displayMode: false })
+                    );
+                    node.innerHTML = html;
+                    node.setAttribute('data-auto-katex-done', 'true');
+                } catch (e) {
+                    // ignore individual failures to keep page rendering
                 }
             });
         };
@@ -225,7 +253,7 @@ const Whitepaper = ({ content, onTermClick }) => {
     }, [content]);
 
     return (
-        <article className="max-w-none">
+        <article className="max-w-none" ref={articleRef}>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
