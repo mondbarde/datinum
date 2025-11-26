@@ -195,7 +195,7 @@ const Whitepaper = ({ content, onTermClick }) => {
 
     React.useEffect(() => {
         let cancelled = false;
-        const script = document.getElementById('katex-script') || document.querySelector('script[src*="katex"]');
+        let script = document.getElementById('katex-script') || document.querySelector('script[src*="katex"]');
 
         const renderKatex = () => {
             if (cancelled || !window.katex) return;
@@ -240,8 +240,18 @@ const Whitepaper = ({ content, onTermClick }) => {
 
         if (window.katex) {
             renderKatex();
-        } else if (script) {
-            script.addEventListener('load', renderKatex);
+        } else {
+            const attach = () => script && script.addEventListener('load', renderKatex);
+
+            if (!script) {
+                script = document.createElement('script');
+                script.id = 'katex-script';
+                script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+
+            attach();
         }
 
         return () => {
