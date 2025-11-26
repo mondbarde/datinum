@@ -10,6 +10,29 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [highlightedTerm, setHighlightedTerm] = useState('');
 
+  const escapeHtml = (str) =>
+    str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  const wrapMath = (text) => {
+    // display math: $$ ... $$
+    text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, expr) => {
+      return `<div class="math-block">${escapeHtml(expr.trim())}</div>`;
+    });
+    // inline math: \( ... \) or $...$
+    text = text.replace(/\\\((.+?)\\\)/g, (_, expr) => {
+      return `<span class="math-inline">${escapeHtml(expr.trim())}</span>`;
+    });
+    text = text.replace(/\$(.+?)\$/g, (_, expr) => {
+      return `<span class="math-inline">${escapeHtml(expr.trim())}</span>`;
+    });
+    return text;
+  };
+
   useEffect(() => {
     const whitepaperUrl = `${import.meta.env.BASE_URL}whitepaper0.1.md`;
 
@@ -17,7 +40,9 @@ function App() {
       .then((response) => response.text())
       .then((text) => {
         // 전처리: ** 패턴을 <strong> 태그로 변환 (특수문자가 있어도 작동하도록)
-        const processed = text.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
+        let processed = text.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
+        // 수식 마커 감지 후 KaTeX 렌더 대상 래핑
+        processed = wrapMath(processed);
         setMarkdown(processed);
       })
       .catch((error) => console.error('Error loading whitepaper:', error));

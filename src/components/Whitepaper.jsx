@@ -86,6 +86,36 @@ const Whitepaper = ({ content, onTermClick }) => {
     };
 
     const components = {
+        div: ({ node, children, className, ...props }) => {
+            if (className === 'math-block') {
+                return (
+                    <div
+                        className="math-block text-lg my-6 text-gray-900 dark:text-gray-100"
+                        data-katex
+                        data-display="true"
+                        {...props}
+                    >
+                        {children}
+                    </div>
+                );
+            }
+            return <div className={className} {...props}>{children}</div>;
+        },
+        span: ({ node, children, className, ...props }) => {
+            if (className === 'math-inline') {
+                return (
+                    <span
+                        className="math-inline text-lg text-gray-900 dark:text-gray-100"
+                        data-katex
+                        data-display="false"
+                        {...props}
+                    >
+                        {children}
+                    </span>
+                );
+            }
+            return <span className={className} {...props}>{children}</span>;
+        },
         h1: ({ node, children, ...props }) => {
             const text = extractText(children);
             const id = slugify(text);
@@ -161,6 +191,38 @@ const Whitepaper = ({ content, onTermClick }) => {
         strong: ({ node, children, ...props }) => <strong className="font-bold text-orange-600 dark:text-orange-400" {...props}>{children}</strong>,
         em: ({ node, ...props }) => <em className="italic text-orange-700 dark:text-orange-400" {...props} />,
     };
+
+    React.useEffect(() => {
+        let cancelled = false;
+        const script = document.getElementById('katex-script') || document.querySelector('script[src*="katex"]');
+
+        const renderKatex = () => {
+            if (cancelled || !window.katex) return;
+            const nodes = document.querySelectorAll('[data-katex]');
+            nodes.forEach((el) => {
+                const isDisplay = el.getAttribute('data-display') === 'true';
+                const tex = el.textContent || '';
+                try {
+                    window.katex.render(tex, el, { displayMode: isDisplay });
+                } catch (e) {
+                    // fail silently to avoid breaking render
+                }
+            });
+        };
+
+        if (window.katex) {
+            renderKatex();
+        } else if (script) {
+            script.addEventListener('load', renderKatex);
+        }
+
+        return () => {
+            cancelled = true;
+            if (script) {
+                script.removeEventListener('load', renderKatex);
+            }
+        };
+    }, [content]);
 
     return (
         <article className="max-w-none">
