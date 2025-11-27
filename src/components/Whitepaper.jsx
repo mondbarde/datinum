@@ -194,7 +194,9 @@ const Whitepaper = ({ content, onTermClick }) => {
     };
 
     React.useEffect(() => {
-        // MathJax handles rendering; no extra work needed here now.
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise().catch((err) => console.error('MathJax typeset failed:', err));
+        }
     }, [content]);
 
     return (
