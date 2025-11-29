@@ -733,6 +733,11 @@ UBI는 **“존재의 가치”**에 대한 보상이라면,
 
 ### 5.4 토큰 유틸리티 (Utility & Use Cases)
 
+<figure style="margin: 2rem 0; text-align: center;">
+  <img src="/images/token-utility.jpg" alt="토큰 유틸리티" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+  <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280;">토큰의 4가지 핵심 유틸리티: 데이터 뱅크, 프리미엄, 거버넌스, 생태계 결제</figcaption>
+</figure>
+
 토큰이 실제로 어디에 쓰이는지 명확해야,
 
 * 가치는 투기보다 **실사용과 네트워크 효과**에 의해 형성될 수 있다.
