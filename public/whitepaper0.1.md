@@ -276,6 +276,11 @@ UBI(Universal Basic Income, 보편적 기본소득)는 오랫동안 사회정책
 
 #### 3.2.3 네트워크 성장과 함께하는 기본소득
 
+<figure style="margin: 2rem 0; text-align: center;">
+  <img src="/images/supply-curve-comparison.jpg" alt="점진적·지속 가능한 통화 공급 개념 비교" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+  <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280;">비트코인의 계단형 반감기 vs 제안된 모델의 부드러운 점진적 감소</figcaption>
+</figure>
+
 우리가 설계하는 통화 공급 구조는, 초기에는 네트워크 성장과 함께 **비교적 높은 비율의 신규 발행**이 이루어지면서 **UBI 풀을 충분히 채우는 것**을 목표로 한다. 하지만 이 발행량은 법정화폐처럼 승수로 팽창하지 않고, **기존 발행량 대비 신규 발행량의 비중이 시간이 갈수록 점차 줄어드는 구조**를 갖는다.
 
 * 초기:
