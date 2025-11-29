@@ -477,9 +477,14 @@ Datinum는 다음과 같은 기능의 제공을 목표로 하고 있다.
 
 ### 4.3 협동조합형 소유 구조
 
+<figure style="margin: 2rem 0; text-align: center;">
+  <img src="/images/coop-governance.jpg" alt="협동조합 조직도 및 토큰 기반 거버넌스 비교" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+  <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280;">협동조합 조직 구조와 토큰 기반 거버넌스의 결합</figcaption>
+</figure>
+
 #### 4.3.1 법인격으로서 협동조합 선택
 
-이 프로젝트는 출발 단계부터 **법인격을 ‘협동조합(cooperative)’ 형태로 선택**한다는 전제를 둔다.
+이 프로젝트는 출발 단계부터 **법인격을 '협동조합(cooperative)' 형태로 선택**한다는 전제를 둔다.
 
 * **지분과 의결권의 집중을 피하기 위해**
   * 특정 VC, 대주주, 창업자 그룹이 모든 의사결정을 독점하는 구조를 지양한다.
