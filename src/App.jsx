@@ -40,7 +40,7 @@ function App() {
               <div className="flex items-center ml-4 lg:ml-0">
                 <FileText className="h-8 w-8 text-orange-600" />
                 <div className="ml-2 flex flex-col leading-tight">
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">Datinum Whitepaper</span>
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">Dataverse Whitepaper</span>
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400">v0.1</span>
                 </div>
               </div>
@@ -92,7 +92,7 @@ function App() {
           <footer className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 mt-12">
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
               <p className="text-center text-base text-gray-500 dark:text-gray-400">
-                &copy; {new Date().getFullYear()} Datinum Project. All rights reserved.
+                &copy; {new Date().getFullYear()} Dataverse Project. All rights reserved.
               </p>
             </div>
           </footer>
