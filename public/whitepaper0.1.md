@@ -656,7 +656,12 @@ Datinum은 기존 발행량 대비 비율을 조정하는 방식이 아니라, *
 * 상대 신규 발행률:  
   $$ r_k = \frac{\Delta S_k}{S_{k-1}} = \frac{m \cdot U_k}{S_{k-1}} $$
 
-시간이 흐를수록 분모 $$ S_{k-1} $$가 커지므로, 별도의 “반감” 파라미터를 넣지 않아도 $$ r_k $$는 자연히 감소한다. 이는 **초기 네트워크 확장기에는 인당 동일한 UBI를 공급하면서도, 장기적으로는 누적 공급량 대비 신규 발행 비중이 줄어 인플레이션 압력이 완만해지는 설계**다.
+시간이 흐를수록 분모 $$ S_{k-1} $$가 커지므로, 별도의 "반감" 파라미터를 넣지 않아도 $$ r_k $$는 자연히 감소한다. 이는 **초기 네트워크 확장기에는 인당 동일한 UBI를 공급하면서도, 장기적으로는 누적 공급량 대비 신규 발행 비중이 줄어 인플레이션 압력이 완만해지는 설계**다.
+
+<figure style="margin: 2rem 0; text-align: center;">
+  <img src="/images/supply-inflation-simulation.jpg" alt="시간에 따른 통화량 & 인플레이션 시뮬레이션" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+  <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #6b7280;">초기 빠른 증가 후 점차 둔화되는 발행 구조와 인플레이션 압력 감소</figcaption>
+</figure>
 
 **유저 수에 연동된 발행량 예시**
 
